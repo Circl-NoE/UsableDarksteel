@@ -21,6 +21,7 @@ namespace UsableDarksteel
         {
             PhysicalMaterial physmat = HashedGeneralValue<PhysicalMaterial>.Get(55232u);
             LibMaterial mat = new LibMaterial(physmat);
+            mat.addToList = false;
             LibMaterial.NewMaterials.Add(mat);
             physmat.isShowingInList = true;
 
