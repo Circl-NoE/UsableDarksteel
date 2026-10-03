@@ -7,7 +7,7 @@ using MelonLoader;
 using System;
 using UnityEngine;
 
-[assembly: MelonInfo(typeof(UsableDarksteel.Main), "Usable Darksteel", "1.0.0", "Circl")]
+[assembly: MelonInfo(typeof(UsableDarksteel.Main), "Usable Darksteel", "1.0.2", "Circl")]
 
 namespace UsableDarksteel
 {
