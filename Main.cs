@@ -32,8 +32,9 @@ namespace UsableDarksteel
             Material[] matArray = new Material[] { mainMat, nonForgeMat };
 
             PhysicalMaterial.MaterialChannel channel = new PhysicalMaterial.MaterialChannel();
+            PhysicalMaterial.MaterialChannel channel2 = new PhysicalMaterial.MaterialChannel();
 
-            PhysicalMaterial.MaterialChannel[] newArr = new PhysicalMaterial.MaterialChannel[] { channel, channel };
+            PhysicalMaterial.MaterialChannel[] newArr = new PhysicalMaterial.MaterialChannel[] { channel, channel2 };
             mat.physicalMaterial.materialChannels = newArr;
             mat.ReplaceAllMaterials(matArray, nonForgeMat);
 
