@@ -1,13 +1,14 @@
-﻿using Alta;
-using Alta.Blacksmithing;
-using Alta.Networking;
-using CustomRecipesAPI;
+﻿using Il2CppAlta;
+using Il2CppAlta.Blacksmithing;
+using Il2CppAlta.Networking;
+using System.Collections.Generic;
 using MateriaLib;
 using MelonLoader;
 using System;
+using System.Linq;
 using UnityEngine;
 
-[assembly: MelonInfo(typeof(UsableDarksteel.Main), "Usable Darksteel", "1.0.2", "Circl")]
+[assembly: MelonInfo(typeof(UsableDarksteel.Main), "Usable Darksteel", "1.0.2-Q", "Circl")]
 
 namespace UsableDarksteel
 {
@@ -19,7 +20,7 @@ namespace UsableDarksteel
         }
         public static void GetAndFix()
         {
-            PhysicalMaterial physmat = HashedGeneralValue<PhysicalMaterial>.Get(55232u);
+            Il2Cpp.PhysicalMaterial physmat = HashedGeneralValue<Il2Cpp.PhysicalMaterial>.Get(55232u);
             LibMaterial mat = new LibMaterial(physmat);
             mat.addToList = false;
             LibMaterial.NewMaterials.Add(mat);
@@ -31,15 +32,17 @@ namespace UsableDarksteel
 
             Material[] matArray = new Material[] { mainMat, nonForgeMat };
 
-            PhysicalMaterial.MaterialChannel channel = new PhysicalMaterial.MaterialChannel();
-            PhysicalMaterial.MaterialChannel channel2 = new PhysicalMaterial.MaterialChannel();
+            Il2Cpp.PhysicalMaterial.MaterialChannel channel = new Il2Cpp.PhysicalMaterial.MaterialChannel();
+            Il2Cpp.PhysicalMaterial.MaterialChannel channel2 = new Il2Cpp.PhysicalMaterial.MaterialChannel();
 
-            PhysicalMaterial.MaterialChannel[] newArr = new PhysicalMaterial.MaterialChannel[] { channel, channel2 };
-            mat.physicalMaterial.materialChannels = newArr;
+            Il2Cpp.PhysicalMaterial.MaterialChannel[] newArr = new Il2Cpp.PhysicalMaterial.MaterialChannel[] { channel, channel2 };
+            mat.physicalMaterial.androidMaterialChannels = newArr;
             mat.ReplaceAllMaterials(matArray, nonForgeMat);
 
             SmeltingRecipe recipe = HashedGeneralValue<SmeltingRecipe>.Get(60118u);
-            Core.AddSmeltingRecipeToSmelterUpgrades(recipe, HashedGeneralValue<SmelterUpgrades>.Get(33428u), true);
+            List<SmeltingRecipe> upg= HashedGeneralValue<SmelterUpgrades>.Get(5674u).recipes.ToList();
+            upg.Add(recipe);
+            HashedGeneralValue<SmelterUpgrades>.Get(5674u).recipes = upg.ToArray();
 
             GameObject IngPrefab = Resources.Load<GameObject>("network prefabs/props/ingots/Darksteel Ingot");
             NetworkPrefab netPrefab = IngPrefab.GetComponent<NetworkPrefab>();
