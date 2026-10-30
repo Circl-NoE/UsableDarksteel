@@ -8,7 +8,7 @@ using System;
 using System.Linq;
 using UnityEngine;
 
-[assembly: MelonInfo(typeof(UsableDarksteel.Main), "Usable Darksteel", "1.0.2-Q", "Circl")]
+[assembly: MelonInfo(typeof(UsableDarksteel.Main), "Usable Darksteel", "1.0.3-Q", "Circl")]
 
 namespace UsableDarksteel
 {
@@ -38,18 +38,6 @@ namespace UsableDarksteel
             Il2Cpp.PhysicalMaterial.MaterialChannel[] newArr = new Il2Cpp.PhysicalMaterial.MaterialChannel[] { channel, channel2 };
             mat.physicalMaterial.androidMaterialChannels = newArr;
             mat.ReplaceAllMaterials(matArray, nonForgeMat);
-
-            SmeltingRecipe recipe = HashedGeneralValue<SmeltingRecipe>.Get(60118u);
-            List<SmeltingRecipe> upg= HashedGeneralValue<SmelterUpgrades>.Get(5674u).recipes.ToList();
-            upg.Add(recipe);
-            HashedGeneralValue<SmelterUpgrades>.Get(5674u).recipes = upg.ToArray();
-
-            GameObject IngPrefab = Resources.Load<GameObject>("network prefabs/props/ingots/Darksteel Ingot");
-            NetworkPrefab netPrefab = IngPrefab.GetComponent<NetworkPrefab>();
-            netPrefab.canBeSpawnedThroughCommand = true;
-
-            mat.ingot = IngPrefab;
-            mat.unlockAt = 3;
         }
     }
 }
